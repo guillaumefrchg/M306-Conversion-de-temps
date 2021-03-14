@@ -75,10 +75,10 @@
   <xs:element name="DBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DBDataSet" msprop:Generator_UserDSName="DBDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Villes" msprop:Generator_TableClassName="VillesDataTable" msprop:Generator_TableVarName="tableVilles" msprop:Generator_TablePropName="Villes" msprop:Generator_RowDeletingName="VillesRowDeleting" msprop:Generator_RowChangingName="VillesRowChanging" msprop:Generator_RowEvHandlerName="VillesRowChangeEventHandler" msprop:Generator_RowDeletedName="VillesRowDeleted" msprop:Generator_UserTableName="Villes" msprop:Generator_RowChangedName="VillesRowChanged" msprop:Generator_RowEvArgName="VillesRowChangeEvent" msprop:Generator_RowClassName="VillesRow">
+        <xs:element name="Villes" msprop:Generator_TableClassName="VillesDataTable" msprop:Generator_TableVarName="tableVilles" msprop:Generator_RowChangedName="VillesRowChanged" msprop:Generator_TablePropName="Villes" msprop:Generator_RowDeletingName="VillesRowDeleting" msprop:Generator_RowChangingName="VillesRowChanging" msprop:Generator_RowEvHandlerName="VillesRowChangeEventHandler" msprop:Generator_RowDeletedName="VillesRowDeleted" msprop:Generator_RowClassName="VillesRow" msprop:Generator_UserTableName="Villes" msprop:Generator_RowEvArgName="VillesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
+              <xs:element name="ID" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" msprop:Generator_ColumnVarNameInTable="columnID" msprop:Generator_ColumnPropNameInRow="ID" msprop:Generator_ColumnPropNameInTable="IDColumn" msprop:Generator_UserColumnName="ID" type="xs:int" />
               <xs:element name="NomVilleFR" msprop:Generator_ColumnVarNameInTable="columnNomVilleFR" msprop:Generator_ColumnPropNameInRow="NomVilleFR" msprop:Generator_ColumnPropNameInTable="NomVilleFRColumn" msprop:Generator_UserColumnName="NomVilleFR" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
