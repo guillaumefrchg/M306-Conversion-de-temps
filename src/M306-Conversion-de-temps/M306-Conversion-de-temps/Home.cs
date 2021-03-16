@@ -17,12 +17,9 @@ namespace M306_Conversion_de_temps
         public Home()
         {
             InitializeComponent();
-
-
-
-            
-
-
+            lblUTC1.DataBindings.Add("Text", villesBS1, "UTC");
+            lblUTC2.DataBindings.Add("Text", villesBS2, "UTC");
+            lblUTC3.DataBindings.Add("Text", villesBS3, "UTC");
 
 
 
@@ -37,9 +34,6 @@ namespace M306_Conversion_de_temps
             this.villesTableAdapter.Fill(this.dBDataSet.Villes);
             // TODO: This line of code loads data into the 'dBDataSet.Villes' table. You can move, or remove it, as needed.
             this.villesTableAdapter.Fill(this.dBDataSet.Villes);
-
-
-
 
         }
 
@@ -56,6 +50,9 @@ namespace M306_Conversion_de_temps
             }
             else
             {
+                DateTime time;
+
+                //time = time.AddHours(Convert.ToInt32(lblUTC2.Text));
 
                 //compensation avec le fuseau horaire choisi
             }
@@ -100,7 +97,9 @@ namespace M306_Conversion_de_temps
             else
             {
                 cbxVille3.Enabled = false;
-                //même cas en cas de désactivation
+                //même situation en cas de désactivation
+
+
             }
         }
 
@@ -110,31 +109,78 @@ namespace M306_Conversion_de_temps
             //fermeture du programme
         }
 
-        private void Calculer(int utc) 
+        private void Calculer(int time, int time2) 
         {
-            DateTime var1;
-            DateTime var2;
-            //déclaration des variables privée pour faire les calculs
+            DateTime var1; //variable de calcul
+            DateTime var2; //variable de référance
+            //déclaration des variables privées pour faire les calculs
             var1 = dtp1.Value;
             var2 = dtp1.Value;
             //assignation de la valeur choisie par l'utilisateur dans la variable privée
-            var1 = var1.AddHours(utc);
-            //ajout ou soustraction en focntion du fuseau horaire
+
+
+            time = time * -1;
+            //si positif rend négatif, si négatif rend positif
+            var1 = var1.AddHours(time);
+            //converti l'heure en temps utc
+
+            var1 = var1.AddHours(time2);
+            //converti le temps utc en fuseau-horaire voulu
+
+
             lblConverti.Text = var1.ToString("HH:mm:ss");
-            //conversion puis affichage de l'heure convertie
+            //affichage de l'heure convertie
 
-            //if (Convert.ToInt32(var1.ToString("dd")) < Convert.ToInt32(var2.ToString("dd"))
-           // {
-
-           //}
-            
+            if ((Convert.ToInt32(var1.ToString("dd"))) > (Convert.ToInt32(var2.ToString("dd"))))
+            //si conversion est donne un temps avec un jour de plus affiche +1
+            {
+                lblDay.Text = "+1";
+            }
+            else if ((Convert.ToInt32(var1.ToString("dd"))) == (Convert.ToInt32(var2.ToString("dd"))))
+            //si conversion reste le même jour affiche +0
+            {
+                lblDay.Text = "+0";
+            }
+            else
+            //si conversion est donne un temps avec un jour de moins affiche -1
+            {
+                lblDay.Text = "-1";
+            }
 
         }
 
         private void dtp1_ValueChanged(object sender, EventArgs e)
         {
-            Calculer(-10);
+            //lbldebug.DataBindings.Add("Text", villesBS1, "UTC");
+            //villesBS1.Current("Text", villesBS1, "UTC");
+            //lbldebug.Text = villesBS1.List[1].ToString();
+            //test - debug
+
+
+
+
+            Calculer(Convert.ToInt32(lblUTC1.Text), Convert.ToInt32(lblUTC2.Text));
             //Indique le fuseau horaire en parenthese et calcule
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbxVille3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblUTC2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

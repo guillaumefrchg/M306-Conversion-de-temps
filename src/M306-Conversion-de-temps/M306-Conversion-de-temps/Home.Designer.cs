@@ -52,13 +52,16 @@
             this.villesBS1 = new System.Windows.Forms.BindingSource(this.components);
             this.dBDataSet = new M306_Conversion_de_temps.DBDataSet();
             this.cbxVille2 = new System.Windows.Forms.ComboBox();
+            this.villesBS2 = new System.Windows.Forms.BindingSource(this.components);
             this.villesTableAdapter = new M306_Conversion_de_temps.DBDataSetTableAdapters.VillesTableAdapter();
             this.tableAdapterManager = new M306_Conversion_de_temps.DBDataSetTableAdapters.TableAdapterManager();
             this.cbxVille3 = new System.Windows.Forms.ComboBox();
-            this.villesBS2 = new System.Windows.Forms.BindingSource(this.components);
             this.villesBS3 = new System.Windows.Forms.BindingSource(this.components);
             this.lblConverti = new System.Windows.Forms.Label();
             this.lbldebug = new System.Windows.Forms.Label();
+            this.lblUTC1 = new System.Windows.Forms.Label();
+            this.lblUTC2 = new System.Windows.Forms.Label();
+            this.lblUTC3 = new System.Windows.Forms.Label();
             this.ms1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBDataSet)).BeginInit();
@@ -166,14 +169,14 @@
             // TSMI1
             // 
             this.TSMI1.Name = "TSMI1";
-            this.TSMI1.Size = new System.Drawing.Size(180, 22);
+            this.TSMI1.Size = new System.Drawing.Size(134, 22);
             this.TSMI1.Text = "Editer la BD";
             this.TSMI1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // TSMI2
             // 
             this.TSMI2.Name = "TSMI2";
-            this.TSMI2.Size = new System.Drawing.Size(180, 22);
+            this.TSMI2.Size = new System.Drawing.Size(134, 22);
             this.TSMI2.Text = "Quitter";
             this.TSMI2.Click += new System.EventHandler(this.TSMI2_Click);
             // 
@@ -227,9 +230,9 @@
             this.lblDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDay.Location = new System.Drawing.Point(563, 184);
             this.lblDay.Name = "lblDay";
-            this.lblDay.Size = new System.Drawing.Size(39, 28);
+            this.lblDay.Size = new System.Drawing.Size(34, 28);
             this.lblDay.TabIndex = 13;
-            this.lblDay.Text = "+1";
+            this.lblDay.Text = "+-";
             // 
             // timer1
             // 
@@ -272,6 +275,11 @@
             this.cbxVille2.TabIndex = 15;
             this.cbxVille2.ValueMember = "ID";
             // 
+            // villesBS2
+            // 
+            this.villesBS2.DataMember = "Villes";
+            this.villesBS2.DataSource = this.dBDataSet;
+            // 
             // villesTableAdapter
             // 
             this.villesTableAdapter.ClearBeforeFill = true;
@@ -288,16 +296,12 @@
             this.cbxVille3.DisplayMember = "NomVilleFR";
             this.cbxVille3.Enabled = false;
             this.cbxVille3.FormattingEnabled = true;
-            this.cbxVille3.Location = new System.Drawing.Point(344, 346);
+            this.cbxVille3.Location = new System.Drawing.Point(344, 359);
             this.cbxVille3.Name = "cbxVille3";
             this.cbxVille3.Size = new System.Drawing.Size(121, 21);
             this.cbxVille3.TabIndex = 16;
             this.cbxVille3.ValueMember = "ID";
-            // 
-            // villesBS2
-            // 
-            this.villesBS2.DataMember = "Villes";
-            this.villesBS2.DataSource = this.dBDataSet;
+            this.cbxVille3.SelectedIndexChanged += new System.EventHandler(this.cbxVille3_SelectedIndexChanged);
             // 
             // villesBS3
             // 
@@ -320,17 +324,52 @@
             // 
             this.lbldebug.AutoSize = true;
             this.lbldebug.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbldebug.Location = new System.Drawing.Point(81, 310);
+            this.lbldebug.Location = new System.Drawing.Point(63, 310);
             this.lbldebug.Name = "lbldebug";
-            this.lbldebug.Size = new System.Drawing.Size(51, 20);
+            this.lbldebug.Size = new System.Drawing.Size(68, 20);
             this.lbldebug.TabIndex = 18;
-            this.lbldebug.Text = "label1";
+            this.lbldebug.Text = "DEBUG";
+            // 
+            // lblUTC1
+            // 
+            this.lblUTC1.AutoSize = true;
+            this.lblUTC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUTC1.Location = new System.Drawing.Point(248, 208);
+            this.lblUTC1.Name = "lblUTC1";
+            this.lblUTC1.Size = new System.Drawing.Size(41, 20);
+            this.lblUTC1.TabIndex = 20;
+            this.lblUTC1.Text = "UTC";
+            this.lblUTC1.Click += new System.EventHandler(this.label1_Click_1);
+            // 
+            // lblUTC2
+            // 
+            this.lblUTC2.AutoSize = true;
+            this.lblUTC2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUTC2.Location = new System.Drawing.Point(462, 208);
+            this.lblUTC2.Name = "lblUTC2";
+            this.lblUTC2.Size = new System.Drawing.Size(41, 20);
+            this.lblUTC2.TabIndex = 21;
+            this.lblUTC2.Text = "UTC";
+            this.lblUTC2.Click += new System.EventHandler(this.lblUTC2_Click);
+            // 
+            // lblUTC3
+            // 
+            this.lblUTC3.AutoSize = true;
+            this.lblUTC3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUTC3.Location = new System.Drawing.Point(376, 336);
+            this.lblUTC3.Name = "lblUTC3";
+            this.lblUTC3.Size = new System.Drawing.Size(41, 20);
+            this.lblUTC3.TabIndex = 22;
+            this.lblUTC3.Text = "UTC";
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 451);
+            this.Controls.Add(this.lblUTC3);
+            this.Controls.Add(this.lblUTC2);
+            this.Controls.Add(this.lblUTC1);
             this.Controls.Add(this.lbldebug);
             this.Controls.Add(this.lblConverti);
             this.Controls.Add(this.cbxVille3);
@@ -391,6 +430,9 @@
         private System.Windows.Forms.BindingSource villesBS3;
         private System.Windows.Forms.Label lblConverti;
         private System.Windows.Forms.Label lbldebug;
+        private System.Windows.Forms.Label lblUTC1;
+        private System.Windows.Forms.Label lblUTC2;
+        private System.Windows.Forms.Label lblUTC3;
     }
 }
 
