@@ -122,7 +122,6 @@
             this.lblTimeNow.Size = new System.Drawing.Size(112, 28);
             this.lblTimeNow.TabIndex = 8;
             this.lblTimeNow.Text = "Time Now";
-            this.lblTimeNow.Click += new System.EventHandler(this.lblTimeNow_Click);
             // 
             // lblLocalTimeZone
             // 
@@ -249,7 +248,6 @@
             this.cbxVille1.Size = new System.Drawing.Size(121, 21);
             this.cbxVille1.TabIndex = 14;
             this.cbxVille1.ValueMember = "ID";
-            this.cbxVille1.SelectedIndexChanged += new System.EventHandler(this.cbxVille1_SelectedIndexChanged);
             this.cbxVille1.Click += new System.EventHandler(this.cbxVille1_Click);
             // 
             // villesBS1
@@ -301,7 +299,6 @@
             this.cbxVille3.Size = new System.Drawing.Size(121, 21);
             this.cbxVille3.TabIndex = 16;
             this.cbxVille3.ValueMember = "ID";
-            this.cbxVille3.SelectedIndexChanged += new System.EventHandler(this.cbxVille3_SelectedIndexChanged);
             // 
             // villesBS3
             // 
@@ -339,7 +336,6 @@
             this.lblUTC1.Size = new System.Drawing.Size(41, 20);
             this.lblUTC1.TabIndex = 20;
             this.lblUTC1.Text = "UTC";
-            this.lblUTC1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // lblUTC2
             // 
@@ -350,7 +346,6 @@
             this.lblUTC2.Size = new System.Drawing.Size(41, 20);
             this.lblUTC2.TabIndex = 21;
             this.lblUTC2.Text = "UTC";
-            this.lblUTC2.Click += new System.EventHandler(this.lblUTC2_Click);
             // 
             // lblUTC3
             // 
@@ -385,7 +380,6 @@
             this.Controls.Add(this.dtp1);
             this.Controls.Add(this.ms1);
             this.Name = "Home";
-            this.Text = "Hour Convert";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ms1.ResumeLayout(false);
             this.ms1.PerformLayout();

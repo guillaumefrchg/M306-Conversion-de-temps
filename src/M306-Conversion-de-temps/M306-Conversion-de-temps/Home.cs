@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Timers;
-using System.Data.OleDb;
 
 namespace M306_Conversion_de_temps
 {
@@ -50,32 +41,24 @@ namespace M306_Conversion_de_temps
             }
             else
             {
-                DateTime time;
+                lblTimeNow.Text = (Afficher(lblUTC3.Text)).ToString("HH:mm:ss");
+                //appelle la méthode d'affichage et affiche
 
-                //time = time.AddHours(Convert.ToInt32(lblUTC2.Text));
-
-                //compensation avec le fuseau horaire choisi
             }
             
         }
 
 
-        private void cbxVille1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void lblTimeNow_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             DBPage dbPage = new DBPage();
             // creation de la page pour la BD
-            //this.Hide(); -- test 
+            
             dbPage.ShowDialog();
             // affichage de la page pour la BD
+
+            //this.Hide(); -- test 
         }
 
 
@@ -109,11 +92,12 @@ namespace M306_Conversion_de_temps
             //fermeture du programme
         }
 
-        private void Calculer(int time, int time2) 
+        private string Calculer(int time, int time2) 
         {
             DateTime var1; //variable de calcul
             DateTime var2; //variable de référance
             //déclaration des variables privées pour faire les calculs
+
             var1 = dtp1.Value;
             var2 = dtp1.Value;
             //assignation de la valeur choisie par l'utilisateur dans la variable privée
@@ -128,8 +112,8 @@ namespace M306_Conversion_de_temps
             //converti le temps utc en fuseau-horaire voulu
 
 
-            lblConverti.Text = var1.ToString("HH:mm:ss");
-            //affichage de l'heure convertie
+            
+            
 
             if ((Convert.ToInt32(var1.ToString("dd"))) > (Convert.ToInt32(var2.ToString("dd"))))
             //si conversion est donne un temps avec un jour de plus affiche +1
@@ -147,40 +131,33 @@ namespace M306_Conversion_de_temps
                 lblDay.Text = "-1";
             }
 
+            return var1.ToString("HH:mm:ss");
+            //affichage de l'heure convertie
+
+        }
+
+        private DateTime Afficher(string input)
+        {
+            DateTime timeNow;
+            //création d'une variable locale
+
+            timeNow = DateTime.UtcNow;
+            //récuperation du temps en UTC
+            timeNow = timeNow.AddHours(Convert.ToInt32(input));
+            //converti et ajoute le fuseau horaire séléctionné
+           
+            
+            return timeNow;
+            //retourne le temps
+            
         }
 
         private void dtp1_ValueChanged(object sender, EventArgs e)
         {
-            //lbldebug.DataBindings.Add("Text", villesBS1, "UTC");
-            //villesBS1.Current("Text", villesBS1, "UTC");
-            //lbldebug.Text = villesBS1.List[1].ToString();
-            //test - debug
 
-
-
-
-            Calculer(Convert.ToInt32(lblUTC1.Text), Convert.ToInt32(lblUTC2.Text));
+            lblConverti.Text = (Calculer(Convert.ToInt32(lblUTC1.Text), Convert.ToInt32(lblUTC2.Text)));
             //Indique le fuseau horaire en parenthese et calcule
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cbxVille3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblUTC2_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
