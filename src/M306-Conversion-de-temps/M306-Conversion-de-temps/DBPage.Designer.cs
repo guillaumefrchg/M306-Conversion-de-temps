@@ -129,7 +129,7 @@
             this.Controls.Add(this.btnsave);
             this.Controls.Add(this.dataGridView1);
             this.Name = "DBPage";
-            this.Text = "Form1";
+            this.Text = "DB edit";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DBPage_FormClosing);
             this.Load += new System.EventHandler(this.DBPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

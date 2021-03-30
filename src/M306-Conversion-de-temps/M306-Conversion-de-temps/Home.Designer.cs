@@ -62,11 +62,13 @@
             this.lblUTC1 = new System.Windows.Forms.Label();
             this.lblUTC2 = new System.Windows.Forms.Label();
             this.lblUTC3 = new System.Windows.Forms.Label();
+            this.pbx1 = new System.Windows.Forms.PictureBox();
             this.ms1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dBDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx1)).BeginInit();
             this.SuspendLayout();
             // 
             // dtp1
@@ -79,7 +81,6 @@
             this.dtp1.ShowUpDown = true;
             this.dtp1.Size = new System.Drawing.Size(97, 29);
             this.dtp1.TabIndex = 0;
-            this.dtp1.ValueChanged += new System.EventHandler(this.dtp1_ValueChanged);
             // 
             // lblTime1
             // 
@@ -193,12 +194,14 @@
             this.heuresAnalogiquesToolStripMenuItem.Name = "heuresAnalogiquesToolStripMenuItem";
             this.heuresAnalogiquesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.heuresAnalogiquesToolStripMenuItem.Text = "Heures Analogiques";
+            this.heuresAnalogiquesToolStripMenuItem.Click += new System.EventHandler(this.heuresAnalogiquesToolStripMenuItem_Click);
             // 
             // heuresDigitalesToolStripMenuItem
             // 
             this.heuresDigitalesToolStripMenuItem.Name = "heuresDigitalesToolStripMenuItem";
             this.heuresDigitalesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.heuresDigitalesToolStripMenuItem.Text = "Heures Digitales";
+            this.heuresDigitalesToolStripMenuItem.Click += new System.EventHandler(this.heuresDigitalesToolStripMenuItem_Click);
             // 
             // langueToolStripMenuItem
             // 
@@ -248,7 +251,6 @@
             this.cbxVille1.Size = new System.Drawing.Size(121, 21);
             this.cbxVille1.TabIndex = 14;
             this.cbxVille1.ValueMember = "ID";
-            this.cbxVille1.Click += new System.EventHandler(this.cbxVille1_Click);
             // 
             // villesBS1
             // 
@@ -326,6 +328,7 @@
             this.lbldebug.Size = new System.Drawing.Size(68, 20);
             this.lbldebug.TabIndex = 18;
             this.lbldebug.Text = "DEBUG";
+            this.lbldebug.Visible = false;
             // 
             // lblUTC1
             // 
@@ -357,11 +360,21 @@
             this.lblUTC3.TabIndex = 22;
             this.lblUTC3.Text = "UTC";
             // 
+            // pbx1
+            // 
+            this.pbx1.Location = new System.Drawing.Point(326, 61);
+            this.pbx1.Name = "pbx1";
+            this.pbx1.Size = new System.Drawing.Size(130, 117);
+            this.pbx1.TabIndex = 23;
+            this.pbx1.TabStop = false;
+            this.pbx1.Visible = false;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(794, 451);
+            this.Controls.Add(this.pbx1);
             this.Controls.Add(this.lblUTC3);
             this.Controls.Add(this.lblUTC2);
             this.Controls.Add(this.lblUTC1);
@@ -380,6 +393,7 @@
             this.Controls.Add(this.dtp1);
             this.Controls.Add(this.ms1);
             this.Name = "Home";
+            this.Text = "Hour Convert";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ms1.ResumeLayout(false);
             this.ms1.PerformLayout();
@@ -387,6 +401,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dBDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.villesBS3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,6 +442,7 @@
         private System.Windows.Forms.Label lblUTC1;
         private System.Windows.Forms.Label lblUTC2;
         private System.Windows.Forms.Label lblUTC3;
+        private System.Windows.Forms.PictureBox pbx1;
     }
 }
 

@@ -1,18 +1,30 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace M306_Conversion_de_temps
 {
     public partial class Home : Form
     {
+
+        int WIDTH = 112, HEIGHT = 112, secHAND = 56, minHAND = 43, hrHAND = 30;
+        //dimensions de la bmp
+
+        //center
+        int cx, cy;
+
+        Bitmap bmp;
+        Graphics g;
+
         public Home()
         {
             InitializeComponent();
+
             lblUTC1.DataBindings.Add("Text", villesBS1, "UTC");
             lblUTC2.DataBindings.Add("Text", villesBS2, "UTC");
             lblUTC3.DataBindings.Add("Text", villesBS3, "UTC");
-
-
+            //Insere les données (villes) dans les listes déroulantes
+       
 
 
         }
@@ -25,6 +37,17 @@ namespace M306_Conversion_de_temps
             this.villesTableAdapter.Fill(this.dBDataSet.Villes);
             // TODO: This line of code loads data into the 'dBDataSet.Villes' table. You can move, or remove it, as needed.
             this.villesTableAdapter.Fill(this.dBDataSet.Villes);
+
+            
+           
+                     
+            bmp = new Bitmap(WIDTH + 1, HEIGHT + 1);
+            //bmp pour l'horloge analogique
+            
+            cx = WIDTH / 2;
+            cy = HEIGHT / 2;
+
+            this.BackColor = Color.White;
 
         }
 
@@ -45,7 +68,66 @@ namespace M306_Conversion_de_temps
                 //appelle la méthode d'affichage et affiche
 
             }
-            
+            if (lblTimeNow.Visible == false)
+            {
+                //create graphics
+                g = Graphics.FromImage(bmp);
+
+                int ss = 0;
+                int mm = 0;
+                int hh = 0;
+
+                if (tb1.Checked == false)
+                {
+                    ss = DateTime.Now.Second;
+                    mm = DateTime.Now.Minute;
+                    hh = DateTime.Now.Hour;
+
+                }
+                else
+                {
+                     ss = Afficher(lblUTC3.Text).Second;
+                     mm = Afficher(lblUTC3.Text).Minute;
+                     hh = Afficher(lblUTC3.Text).Hour;
+                }
+
+                int[] handCoord = new int[2];
+
+                //clear
+                g.Clear(Color.White);
+
+                //draw circle
+                g.DrawEllipse(new Pen(Color.Black, 1f), 0, 0, WIDTH, HEIGHT);
+
+                //draw figure
+                g.DrawString("12", new Font("Arial", 12), Brushes.Black, new PointF(140, 2));
+                g.DrawString("3", new Font("Arial", 12), Brushes.Black, new PointF(286, 140));
+                g.DrawString("6", new Font("Arial", 12), Brushes.Black, new PointF(142, 282));
+                g.DrawString("9", new Font("Arial", 12), Brushes.Black, new PointF(0, 140));
+
+                //second hand
+                handCoord = msCoord(ss, secHAND);
+                g.DrawLine(new Pen(Color.Red, 1f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+                //minute hand
+                handCoord = msCoord(mm, minHAND);
+                g.DrawLine(new Pen(Color.Black, 2f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+                //hour hand
+                handCoord = hrCoord(hh % 12, mm, hrHAND);
+                g.DrawLine(new Pen(Color.Gray, 3f), new Point(cx, cy), new Point(handCoord[0], handCoord[1]));
+
+                //load bmp in picturebox1
+                pbx1.Image = bmp;
+
+ 
+                //dispose
+                g.Dispose();
+            }
+            lblConverti.Text = (Calculer(Convert.ToInt32(lblUTC1.Text), Convert.ToInt32(lblUTC2.Text)));
+            //Indique le fuseau horaire en parenthese et calcule
+
+
         }
 
 
@@ -62,13 +144,6 @@ namespace M306_Conversion_de_temps
         }
 
 
-
-        private void cbxVille1_Click(object sender, EventArgs e)
-        {
-            //lblTime1.Text = cbxVille1.SelectedIndex.ToString(); -- test
-            //lblTime1.Text = villesBS1.Position.ToString(); -- test
-
-        }
 
         private void tb1_CheckedChanged(object sender, EventArgs e)
         {
@@ -136,6 +211,19 @@ namespace M306_Conversion_de_temps
 
         }
 
+        private void heuresAnalogiquesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblTimeNow.Visible = false;
+            pbx1.Visible = true;
+
+        }
+
+        private void heuresDigitalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lblTimeNow.Visible = true;
+            pbx1.Visible = false;
+        }
+
         private DateTime Afficher(string input)
         {
             DateTime timeNow;
@@ -152,12 +240,46 @@ namespace M306_Conversion_de_temps
             
         }
 
-        private void dtp1_ValueChanged(object sender, EventArgs e)
-        {
 
-            lblConverti.Text = (Calculer(Convert.ToInt32(lblUTC1.Text), Convert.ToInt32(lblUTC2.Text)));
-            //Indique le fuseau horaire en parenthese et calcule
+        private int[] msCoord(int val, int hlen)
+        {
+            int[] coord = new int[2];
+            val *= 6;   //each minute and second make 6 degree
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
         }
 
+        
+        private int[] hrCoord(int hval, int mval, int hlen)
+        //Coordonnées pour l'aiguille de des heures
+        {
+            int[] coord = new int[2];
+
+            //chaque heure fait 30 dégres
+            //chaque minute fait 0.5 deg
+            int val = (int)((hval * 30) + (mval * 0.5));
+
+            if (val >= 0 && val <= 180)
+            {
+                coord[0] = cx + (int)(hlen * Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            else
+            {
+                coord[0] = cx - (int)(hlen * -Math.Sin(Math.PI * val / 180));
+                coord[1] = cy - (int)(hlen * Math.Cos(Math.PI * val / 180));
+            }
+            return coord;
+        }
     }
 }
