@@ -169,14 +169,14 @@
             // TSMI1
             // 
             this.TSMI1.Name = "TSMI1";
-            this.TSMI1.Size = new System.Drawing.Size(134, 22);
+            this.TSMI1.Size = new System.Drawing.Size(180, 22);
             this.TSMI1.Text = "Editer la BD";
             this.TSMI1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // TSMI2
             // 
             this.TSMI2.Name = "TSMI2";
-            this.TSMI2.Size = new System.Drawing.Size(134, 22);
+            this.TSMI2.Size = new System.Drawing.Size(180, 22);
             this.TSMI2.Text = "Quitter";
             this.TSMI2.Click += new System.EventHandler(this.TSMI2_Click);
             // 
@@ -215,13 +215,13 @@
             // françaisToolStripMenuItem
             // 
             this.françaisToolStripMenuItem.Name = "françaisToolStripMenuItem";
-            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.françaisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.françaisToolStripMenuItem.Text = "Français";
             // 
             // anglaisToolStripMenuItem
             // 
             this.anglaisToolStripMenuItem.Name = "anglaisToolStripMenuItem";
-            this.anglaisToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.anglaisToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.anglaisToolStripMenuItem.Text = "Anglais";
             // 
             // lblDay
